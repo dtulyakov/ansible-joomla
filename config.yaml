@@ -1,0 +1,7 @@
+configs:
+    os: "9.2"                                    # Choose between 8.9 and 9.2 (change requires: vagrant destroy & vagrant up)
+    private_ip: "192.168.13.1"
+    vmname: "joomla"                             # VM name for Virtualbox
+    servername: "lemp.test"                      # Servername and domain for your projects
+    projectnames: ["example"]                    # Comma-separated list with your projectnames
+    joomla_version: 3.6.5                        # Joomla version like 3.6.5
