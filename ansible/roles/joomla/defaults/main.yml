@@ -1,0 +1,5 @@
+---
+# defaults file for joomla-ansible/
+joomla_version: "3.6.5"
+# Url to get the joomla distribution
+joomla_dist_url: "https://github.com/joomla/joomla-cms/releases/download/{{joomla_version}}/Joomla_{{joomla_version}}-Stable-Full_Package.zip"

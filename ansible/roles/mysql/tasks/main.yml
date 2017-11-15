@@ -1,0 +1,19 @@
+##################################################
+### Install and configure MySQL
+- name: Install Packages
+  apt:  name={{ item }} state=installed
+  with_items:
+  - mysql-server
+  #- python-mysqldb
+
+- name: User Create test1
+  mysql_user: name=test1 host=% password=test1 priv=*.*:ALL state=present
+
+- name: User Create test2
+  mysql_user: name=test2 host=% password=test2 priv=*.*:ALL state=present
+
+- name: apache2 listen on port 8081
+  lineinfile: dest=/etc/mysql/mariadb.conf.d/50-server.cnf regexp="^max_connections" line="max_connections = 700" state=present
+  notify:
+    - restart mysql
+

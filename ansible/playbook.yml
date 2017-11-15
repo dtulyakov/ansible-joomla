@@ -1,0 +1,11 @@
+ - hosts: all
+   roles:
+    - { role: basics }
+    - { role: apache2 }
+    - { role: nginx }
+    - { role: php }
+    - { role: mysql }
+    - { role: joomla }
+   post_tasks:
+    - service: name=nginx state=restarted
+    - service: name=apache2 state=restarted

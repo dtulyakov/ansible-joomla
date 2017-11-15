@@ -1,0 +1,44 @@
+##################################################
+### Install basic system packages
+- name: Install basic packages
+  apt: name={{ item }} state=present
+  with_items:
+    - software-properties-common
+    - python-mysqldb
+    - vim
+    - git
+    - curl
+    - wget
+    - zip
+    - unzip
+    - debian-goodies
+    - apt-transport-https
+    - ca-certificates
+    - imagemagick
+
+##################################################
+### Install and configure PHP
+#- name: Add apt key for Debian
+#  apt_key: url={{ apache_repo_key }} state=present
+#
+#- name: Add repository for Debian
+#  apt_repository: repo="deb {{ apache_repo }} {{ ansible_distribution_release }} main" state=present update_cache=yes
+#
+### Add key
+- name: Add apt dotkey for Debian
+  apt_key: url="https://www.dotdeb.org/dotdeb.gpg" state=present
+
+- name: Add apt dot repository for Debian
+  apt_repository: repo="{{ item }} http://packages.dotdeb.org/ stable all" state=present update_cache=yes
+  with_items:
+    - deb
+    - deb-src
+##################################################
+### Convenience
+- name: Configure inputrc and vimrc for root
+  template: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+   - { src: inputrc, dest: /root/.inputrc }
+   - { src: vimrc, dest: /root/.vimrc }
+#   - { src: inputrc, dest: /home/vagrant/.inputrc }
+#   - { src: vimrc, dest: /home/vagrant/.vimrc }
